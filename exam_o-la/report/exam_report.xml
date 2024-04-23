@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@class='page']" position="inside">
+            <div class="row mt32 mb32">
+                <div class="col-xs-12">
+                    <h2>Resumen de bonos</h2>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Producto</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.resumen_bono_ids" t-as="bono">
+                                <tr>
+                                    <td><span t-field="bono.name"/></td>
+                                    <td><span t-field="bono.producto.name"/></td>
+                                    <td><span t-field="bono.monto"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

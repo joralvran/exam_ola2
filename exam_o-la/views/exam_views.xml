@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- El campo 'Moneda para bonos' se posiciona justo después del campo 'payment_term_id'. -->
+                <field name="payment_term_id" position="after">
+                    <field name="moneda_para_bonos"/>
+                </field>
+                <!-- El campo 'Bono' en la pestaña 'Líneas del pedido' justo antes del campo 'name'. -->
+                <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="before">
+                    <field name="bono"/>
+                </xpath>
+                <!-- La pestaña 'Resumen de Bonos' se posiciona justo después de la pestaña 'Líneas del pedido'. -->
+                <xpath expr="//notebook/page[@name='order_lines']" position="after">
+                    <page string="Resumen de Bonos">
+                        <field name="resumen_bono_ids" widget="one2many_list">
+                            <tree string="Resumen de Bonos">
+                                <field name="name"/>
+                                <field name="producto"/>
+                                <field name="monto"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
